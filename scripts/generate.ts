@@ -54,8 +54,7 @@ config.dsa.forEach((ds) => {
 });
 
 import { ts_config, package_json, stats } from "./utils/align-configs";
-Promise.all([
-    ts_config(tsconfig_path, day_name),
-    package_json(package_json_path, relative_day_path),
-    stats(stats_path, config),
-]);
+
+ts_config(tsconfig_path, day_name);
+package_json(package_json_path, relative_day_path);
+stats(stats_path, config);

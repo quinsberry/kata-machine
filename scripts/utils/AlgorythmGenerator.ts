@@ -11,12 +11,11 @@ export class AlgorythmGenerator {
     }
 
     create_class(name: string, item: AlgorythmStructure) {
-        const classGen = `
-export default class ${name}${item.generic || ""} {
-    ${item.properties?.map(this.generate_property).join("\n") ?? ""}
+        const classGen = `export default class ${name}${item.generic || ""} {
+    ${(item.properties || []).map(this.generate_property).join("")}
     ${this.generate_constructor(item.args)}
-    ${item.getters?.map(this.generate_getter).join("\n") ?? ""}
-    ${item.methods?.map(this.generate_method).join("\n") ?? ""}
+    ${(item.getters || []).map(this.generate_getter).join("")}
+    ${(item.methods || []).map(this.generate_method).join("")}
 }
         `;
 
@@ -25,9 +24,8 @@ export default class ${name}${item.generic || ""} {
 
     create_function(name: string, item: AlgorythmStructure) {
         const g = item.generic ? item.generic : "";
-        const funcitonGen = `
-export default function ${item.fn}${g}(${item.args}): ${item.return} {
-
+        const funcitonGen = `export default function ${item.fn}${g}(${item.args}): ${item.return} {
+    
 }
         `;
 
@@ -37,7 +35,7 @@ export default function ${item.fn}${g}(${item.args}): ${item.return} {
     private generate_constructor(args: string | undefined) {
         return `
     constructor(${args ?? ""}) {
-        
+
     }
         `;
     }
@@ -46,7 +44,8 @@ export default function ${item.fn}${g}(${item.args}): ${item.return} {
         return `
     ${method.name}(${method.args || ""}): ${method.return || "void"} {
 
-    }`;
+    }
+        `;
     }
 
     private generate_property(prop: AlgorythmProp) {
@@ -55,10 +54,10 @@ export default function ${item.fn}${g}(${item.args}): ${item.return} {
 
     private generate_getter(getter: AlgorythmGetter) {
         return `
-get ${getter.name}(): ${getter.return} {
-    return this.${getter.prop_name};
-}
-`;
+    get ${getter.name}(): ${getter.return} {
+        return this.${getter.prop_name};
+    }
+        `;
     }
 }
 
