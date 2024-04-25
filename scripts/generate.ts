@@ -3,11 +3,13 @@ import { join, relative } from "node:path";
 import { config } from "../ligma.config";
 import { dsa } from "./utils/dsa";
 import { AlgorythmGenerator } from "./utils/AlgorythmGenerator";
+import {
+    src_path,
+    stats_path,
+    tsconfig_path,
+    package_json_path,
+} from "./utils/constants";
 
-const src_path = join(__dirname, "..", "src");
-const package_json_path = join(process.cwd(), "package.json");
-const tsconfig_path = join(process.cwd(), "tsconfig.json");
-export const stats_path = join(process.cwd(), "stats.json");
 let day = 1;
 
 try {
