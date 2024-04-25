@@ -1,6 +1,6 @@
 import { readdirSync, rmSync } from "node:fs";
 import { join } from "node:path";
-import { stats_path } from "./align-configs";
+import { stats_path } from "./generate";
 
 const src_path = join(__dirname, "..", "src");
 

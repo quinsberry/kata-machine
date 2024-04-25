@@ -1,61 +1,4 @@
-export interface AlgorythmProp {
-    name: string;
-    type: string;
-    scope: string;
-}
-export interface AlgorythmMethod {
-    name: string;
-    args?: string;
-    return: string;
-}
-export interface AlgorythmGetter {
-    name: string;
-    prop_name: string;
-    return: string;
-}
-
-export interface AlgorythmStructure {
-    generic?: string;
-    type: "class" | "fn";
-    methods?: AlgorythmMethod[];
-    properties?: AlgorythmProp[];
-    getters?: AlgorythmGetter[];
-    fn?: string;
-    args?: string;
-    return?: string;
-}
-export type Algorythm = [
-    "DFSOnBST",
-    "LRU",
-    "LinearSearchList",
-    "BinarySearchList",
-    "TwoCrystalBalls",
-    "BubbleSort",
-    "SinglyLinkedList",
-    "DoublyLinkedList",
-    "Queue",
-    "Stack",
-    "ArrayList",
-    "MazeSolver",
-    "QuickSort",
-    "BTPreOrder",
-    "BTInOrder",
-    "BTPostOrder",
-    "BTBFS",
-    "CompareBinaryTrees",
-    "DFSGraphList",
-    "Trie",
-    "BFSGraphMatrix",
-    "BFSGraphList",
-    "Map",
-    "MinHeap",
-    "DijkstraList",
-    "InsertionSort",
-    "MergeSort",
-    "RingBuffer",
-    "PrimsList",
-][number];
-export type DSA = Record<Algorythm, AlgorythmStructure>;
+import { DSA } from "./types";
 
 const length_property = {
     properties: [
@@ -204,6 +147,7 @@ export const dsa: DSA = {
 
     ArrayList: {
         type: "class",
+        args: 'items: T',
         generic: "<T>",
         ...list_interface,
     },
@@ -415,4 +359,4 @@ export const dsa: DSA = {
         args: "graph: WeightedAdjacencyMatrix, source: number, needle: number",
         return: "number[] | null",
     },
-} as const;
+};

@@ -1,16 +1,13 @@
 import { readdirSync, unlinkSync, mkdirSync } from "node:fs";
 import { join, relative } from "node:path";
 import { config } from "../ligma.config";
-import {
-    Algorythm,
-    AlgorythmGetter,
-    AlgorythmMethod,
-    AlgorythmProp,
-    AlgorythmStructure,
-    dsa,
-} from "./dsa";
+import { dsa } from "./utils/dsa";
+import { AlgorythmGenerator } from "./utils/AlgorythmGenerator";
 
 const src_path = join(__dirname, "..", "src");
+const package_json_path = join(process.cwd(), "package.json");
+const tsconfig_path = join(process.cwd(), "tsconfig.json");
+export const stats_path = join(process.cwd(), "stats.json");
 let day = 1;
 
 try {
@@ -40,48 +37,7 @@ try {
     mkdirSync(day_path);
 } catch (e) {}
 
-function generate_method(method: AlgorythmMethod) {
-    return `${method.name}(${method.args || ""}): ${method.return || "void"} {
-
-}`;
-}
-
-function generate_property(prop: AlgorythmProp) {
-    return `${prop.scope} ${prop.name}: ${prop.type};`;
-}
-
-function generate_getter(getter: AlgorythmGetter) {
-    return `get ${getter.name}(): ${getter.return} {
-    return this.${getter.prop_name};
-}`;
-}
-
-function create_class(name: Algorythm, item: AlgorythmStructure) {
-    Bun.write(
-        join(day_path, `${name}.ts`),
-        `export default class ${name}${item.generic || ""} {
-        ${(item.properties || []).map(generate_property).join("\n    ")}
-    
-        ${(item.getters || []).map(generate_getter).join("\n    ")}
-    
-        constructor() {
-        }
-    
-        ${(item.methods || []).map(generate_method).join("\n    ")}
-    }`,
-    );
-}
-
-function create_function(name: Algorythm, item: AlgorythmStructure) {
-    const g = item.generic ? item.generic : "";
-
-    Bun.write(
-        join(day_path, `${name}.ts`),
-        `export default function ${item.fn}${g}(${item.args}): ${item.return} {
-
-}`,
-    );
-}
+const generator = new AlgorythmGenerator({ path: day_path });
 
 config.dsa.forEach((ds) => {
     const item = dsa[ds];
@@ -89,13 +45,15 @@ config.dsa.forEach((ds) => {
         throw new Error(`algorithm ${ds} could not be found`);
     }
     if (item.type === "class") {
-        create_class(ds, item);
+        generator.create_class(ds, item);
     } else {
-        create_function(ds, item);
+        generator.create_function(ds, item);
     }
 });
 
-import { ts_config, package_json, stats } from "./align-configs";
-await ts_config(day_name);
-await package_json(config, relative_day_path);
-await stats(config, day_path);
+import { ts_config, package_json, stats } from "./utils/align-configs";
+Promise.all([
+    ts_config(tsconfig_path, day_name),
+    package_json(package_json_path, relative_day_path),
+    stats(stats_path, config),
+]);

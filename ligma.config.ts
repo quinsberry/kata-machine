@@ -1,6 +1,6 @@
-import { Algorythm } from "./scripts/dsa";
+import { LigmaConfig } from "./scripts/utils/types";
 
-export const config = {
+export const config: LigmaConfig = {
     dsa: [
         "DFSOnBST",
         "LRU",
@@ -31,6 +31,5 @@ export const config = {
         "MergeSort",
         "RingBuffer",
         "PrimsList",
-    ] satisfies Algorythm[],
-} as const;
-export type LigmaConfig = typeof config;
+    ],
+};
