@@ -1,0 +1,36 @@
+import { Algorythm } from "./scripts/dsa";
+
+export const config = {
+    dsa: [
+        "DFSOnBST",
+        "LRU",
+        "LinearSearchList",
+        "BinarySearchList",
+        "TwoCrystalBalls",
+        "BubbleSort",
+        "SinglyLinkedList",
+        "DoublyLinkedList",
+        "Queue",
+        "Stack",
+        "ArrayList",
+        "MazeSolver",
+        "QuickSort",
+        "BTPreOrder",
+        "BTInOrder",
+        "BTPostOrder",
+        "BTBFS",
+        "CompareBinaryTrees",
+        "DFSGraphList",
+        "Trie",
+        "BFSGraphMatrix",
+        "BFSGraphList",
+        "Map",
+        "MinHeap",
+        "DijkstraList",
+        "InsertionSort",
+        "MergeSort",
+        "RingBuffer",
+        "PrimsList",
+    ] satisfies Algorythm[],
+} as const;
+export type LigmaConfig = typeof config;

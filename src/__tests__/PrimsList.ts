@@ -1,5 +1,6 @@
-import prims from "@code/PrimsAlgorithm";
-import { list1 } from "./graph";
+import prims from "@code/PrimsList";
+import { list1 } from "./data/graph";
+import { expect, test } from "bun:test";
 
 test("PrimsAlgorithm", function () {
     // there is only one right answer for this graph
