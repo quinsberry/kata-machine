@@ -42,17 +42,17 @@ OUT OF DATE.  We have quite a few more.  need to update
 
 ### How It Works
 
-Make sure you have [Node.js](https://nodejs.org/en/) and yarn installed: `npm install --global yarn`
+Make sure you have [Bun](https://bun.sh/) and bun installed.
 
 clone the repo and install the dependencies
 
 ```bash
-yarn install
+bun install
 ```
 
-edit the `ligma.config.js` file
-```javascript
-module.exports = {
+edit the `ligma.config.ts` file
+```typescript
+export const config: LigmaConfig = {
     dsa: [
         "InsertionSort",
         "MergeSort",
@@ -65,9 +65,9 @@ module.exports = {
 }
 ```
 
-create a day of katas, this will use the list in the `ligma.config.js`.
+create a day of katas, this will use the list in the `ligma.config.ts`.
 ```bash
-yarn generate
+bun generate
 ```
 
 this will progressively create folders named
@@ -78,13 +78,13 @@ src/day2
 ...
 ```
 
-`yarn generate` will also update the `tsconfig.json` and `jest.config` to point
+`bun generate` will also update the `tsconfig.json` to point
 the latest `day` folder via tspaths.  This allows us to avoid updating anything
 for testing each day.
 
 #### Testing
 ```
-yarn test
+bun test
 ```
 
 I have yet to create a testing strategy for next sets of algorithms, but we
