@@ -6,13 +6,13 @@ test("RingBuffer", function () {
 
     buffer.push(5);
     expect(buffer.pop()).toEqual(5);
-    expect<number | undefined>(buffer.pop()).toEqual(undefined);
+    expect(buffer.pop()).toBeUndefined();
 
     buffer.push(42);
     buffer.push(9);
     expect(buffer.pop()).toEqual(42);
     expect(buffer.pop()).toEqual(9);
-    expect<number | undefined>(buffer.pop()).toEqual(undefined);
+    expect(buffer.pop()).toBeUndefined();
 
     buffer.push(42);
     buffer.push(9);

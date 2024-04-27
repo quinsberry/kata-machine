@@ -13,12 +13,12 @@ test("Map", function () {
     expect(map.size()).toEqual(4);
 
     expect(map.get("bar")).toEqual(69);
-    expect<number | undefined>(map.get("blaz")).toEqual(undefined);
+    expect(map.get("blaz")).toBeUndefined();
 
     map.delete("barblabr");
     expect(map.size()).toEqual(4);
 
     map.delete("bar");
     expect(map.size()).toEqual(3);
-    expect<number | undefined>(map.get("bar")).toEqual(undefined);
+    expect(map.get("bar")).toBeUndefined();
 });

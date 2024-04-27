@@ -1,8 +1,7 @@
 import ArrayList from "@code/ArrayList";
 import { test_list } from "./data/ListTest";
-import { test } from "bun:test";
+import { describe } from "bun:test";
 
-test("array-list", function () {
-    const list = new ArrayList(3);
-    test_list(list);
+describe("array-list", function () {
+    test_list(() => new ArrayList(3));
 });

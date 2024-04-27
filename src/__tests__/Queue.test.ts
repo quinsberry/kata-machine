@@ -21,7 +21,7 @@ test("queue", function () {
     expect(list.deque()).toEqual(9);
     expect(list.peek()).toEqual(11);
     expect(list.deque()).toEqual(11);
-    expect<number | undefined>(list.deque()).toEqual(undefined);
+    expect(list.deque()).toBeUndefined();
     expect(list.length).toEqual(0);
 
     // just wanted to make sure that I could not blow up myself when i remove

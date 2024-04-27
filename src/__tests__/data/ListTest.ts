@@ -1,28 +1,69 @@
-import { expect } from "bun:test";
+import { test, beforeEach, expect } from "bun:test";
 
-export function test_list(list: List<number>): void {
-    list.append(5);
-    list.append(7);
-    list.append(9);
+export function test_list(createList: () => List<number>): void {
+    let list: List<number>;
 
-    expect(list.get(2)).toEqual(9);
-    expect(list.removeAt(1)).toEqual(7);
-    expect(list.length).toEqual(2);
+    beforeEach(() => {
+        list = createList();
+    });
 
-    list.append(11);
-    expect(list.removeAt(1)).toEqual(9);
-    expect<number | undefined>(list.remove(9)).toEqual(undefined);
-    expect(list.removeAt(0)).toEqual(5);
-    expect(list.removeAt(0)).toEqual(11);
-    expect(list.length).toEqual(0);
+    test("prepend", () => {
+        list.prepend(1);
+        expect(list.get(0)).toBe(1);
+    });
 
-    list.prepend(5);
-    list.prepend(7);
-    list.prepend(9);
+    test("append", () => {
+        list.append(1);
+        expect(list.get(0)).toBe(1);
+    });
 
-    expect(list.get(2)).toEqual(5);
-    expect(list.get(0)).toEqual(9);
-    expect(list.remove(9)).toEqual(9);
-    expect(list.length).toEqual(2);
-    expect(list.get(0)).toEqual(7);
+    test("insertAt", () => {
+        list.append(1);
+        list.append(3);
+        list.insertAt(2, 1);
+        expect(list.get(1)).toBe(2);
+    });
+
+    test("remove", () => {
+        list.append(1);
+        list.remove(1);
+        expect(list.get(0)).toBeUndefined();
+    });
+
+    test("removeAt", () => {
+        list.append(1);
+        list.append(2);
+        list.removeAt(0);
+        expect(list.get(0)).toBe(2);
+        expect(list.length).toBe(1);
+    });
+
+    test("length", () => {
+        list.append(1);
+        list.append(2);
+        expect(list.length).toBe(2);
+    });
+
+    test("insertAt with invalid index", () => {
+        list.append(1);
+        list.append(3);
+        expect(() => list.insertAt(2, 3)).toThrow();
+    });
+
+    test("remove non-existing element", () => {
+        list.append(1);
+        expect(list.remove(2)).toBeUndefined();
+    });
+
+    test("removeAt with invalid index", () => {
+        list.append(1);
+        list.append(2);
+        expect(list.removeAt(3)).toBeUndefined();
+    });
+
+    test("get with invalid index", () => {
+        list.append(1);
+        list.append(2);
+        expect(list.get(3)).toBeUndefined();
+    });
 }

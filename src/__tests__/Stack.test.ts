@@ -16,7 +16,7 @@ test("stack", function () {
     expect(list.pop()).toEqual(7);
     expect(list.peek()).toEqual(5);
     expect(list.pop()).toEqual(5);
-    expect<number | undefined>(list.pop()).toEqual(undefined);
+    expect(list.pop()).toBeUndefined();
 
     // just wanted to make sure that I could not blow up myself when i remove
     // everything

@@ -4,7 +4,7 @@ import { expect, test } from "bun:test";
 test("LRU", function () {
     const lru = new LRU<string, number>(3) as ILRU<string, number>;
 
-    expect<number | undefined>(lru.get("foo")).toEqual(undefined);
+    expect(lru.get("foo")).toBeUndefined();;
     lru.update("foo", 69);
     expect(lru.get("foo")).toEqual(69);
 
@@ -16,7 +16,7 @@ test("LRU", function () {
 
     lru.update("ball", 69420);
     expect(lru.get("ball")).toEqual(69420);
-    expect<number | undefined>(lru.get("foo")).toEqual(undefined);
+    expect(lru.get("foo")).toBeUndefined();;
     expect(lru.get("bar")).toEqual(420);
     lru.update("foo", 69);
     expect(lru.get("bar")).toEqual(420);
@@ -24,5 +24,5 @@ test("LRU", function () {
 
     // shouldn't of been deleted, but since bar was get'd, bar was added to the
     // front of the list, so baz became the end
-    expect<number | undefined>(lru.get("baz")).toEqual(undefined);
+    expect(lru.get("baz")).toBeUndefined();;
 });
