@@ -43,7 +43,7 @@ export class AlgorythmGenerator {
     private generate_method(method: AlgorythmMethod) {
         return `
     ${method.name}(${method.args || ""}): ${method.return || "void"} {
-
+    
     }
         `;
     }
@@ -54,8 +54,8 @@ export class AlgorythmGenerator {
 
     private generate_getter(getter: AlgorythmGetter) {
         return `
-    get ${getter.name}(): ${getter.return} {
-        return this.${getter.prop_name};
+    ${getter.scope} get ${getter.name}(): ${getter.type} {
+    
     }
         `;
     }
@@ -71,10 +71,7 @@ export interface AlgorythmMethod {
     args?: string;
     return: string;
 }
-export interface AlgorythmGetter {
-    name: string;
-    prop_name: string;
-    return: string;
+export interface AlgorythmGetter extends AlgorythmProp {
 }
 
 export interface AlgorythmStructure {

@@ -1,3 +1,4 @@
+import { AlgorythmStructure } from "./AlgorythmGenerator";
 import { DSA } from "./types";
 
 const length_property = {
@@ -9,7 +10,7 @@ const length_property = {
         },
     ],
 };
-const list_interface = {
+const list_interface: Partial<AlgorythmStructure> = {
     methods: [
         {
             name: "prepend",
@@ -42,12 +43,13 @@ const list_interface = {
             return: "T | undefined",
         },
     ],
-    ...length_property,
+    getters: length_property.properties
 };
 export const dsa: DSA = {
     LRU: {
         generic: "<K, V>",
         type: "class",
+        args: 'init: number',
         methods: [
             {
                 name: "update",
