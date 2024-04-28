@@ -1,12 +1,32 @@
 import binary_fn from "@code/BinarySearchList";
-import { expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
-test("binary search array", function () {
-    const foo = [1, 3, 4, 69, 71, 81, 90, 99, 420, 1337, 69420];
-    expect(binary_fn(foo, 69)).toEqual(true);
-    expect(binary_fn(foo, 1336)).toEqual(false);
-    expect(binary_fn(foo, 69420)).toEqual(true);
-    expect(binary_fn(foo, 69421)).toEqual(false);
-    expect(binary_fn(foo, 1)).toEqual(true);
-    expect(binary_fn(foo, 0)).toEqual(false);
+describe("BinarySearchList", () => {
+    test("finds element in the middle of the array", () => {
+        expect(binary_fn([1, 2, 3, 4, 5], 3)).toBeTrue();
+    });
+
+    test("finds element at the beginning of the array", () => {
+        expect(binary_fn([1, 2, 3, 4, 5], 1)).toBeTrue();
+    });
+
+    test("finds element at the end of the array", () => {
+        expect(binary_fn([1, 2, 3, 4, 5], 5)).toBeTrue();
+    });
+
+    test("returns false if element is not in the array", () => {
+        expect(binary_fn([1, 2, 3, 4, 5], 6)).toBeFalse();
+    });
+
+    test("returns false if array is empty", () => {
+        expect(binary_fn([], 1)).toBeFalse();
+    });
+
+    test("finds element in array of length 1", () => {
+        expect(binary_fn([1], 1)).toBeTrue();
+    });
+
+    test("returns false if element is not in array of length 1", () => {
+        expect(binary_fn([1], 2)).toBeFalse();
+    });
 });

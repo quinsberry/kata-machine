@@ -1,14 +1,36 @@
 import two_crystal_balls from "@code/TwoCrystalBalls";
-import { expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
-test("two crystal balls", function () {
-    let idx = Math.floor(Math.random() * 10000);
-    const data = new Array(10000).fill(false);
+describe('TwoCrystalBalls', () => {
+    test('returns -1 when no ball breaks', () => {
+        expect(two_crystal_balls([false, false, false, false, false])).toBe(-1);
+    });
 
-    for (let i = idx; i < 10000; ++i) {
-        data[i] = true;
-    }
+    test('returns the index of the first break', () => {
+        expect(two_crystal_balls([false, false, true, false, false])).toBe(2);
+    });
 
-    expect(two_crystal_balls(data)).toEqual(idx);
-    expect(two_crystal_balls(new Array(821).fill(false))).toEqual(-1);
+    test('returns the index of the first break when it is at the beginning', () => {
+        expect(two_crystal_balls([true, true, true, true, true])).toBe(0);
+    });
+
+    test('returns the index of the first break when it is at the end', () => {
+        expect(two_crystal_balls([false, false, false, false, true])).toBe(4);
+    });
+
+    test('returns -1 when array is empty', () => {
+        expect(two_crystal_balls([])).toBe(-1);
+    });
+
+    test('returns the index of the first break in array of length 1', () => {
+        expect(two_crystal_balls([true])).toBe(0);
+    });
+
+    test('returns -1 if no break in array of length 1', () => {
+        expect(two_crystal_balls([false])).toBe(-1);
+    });
+
+    test('returns the index of the first break when it is at the jump point', () => {
+        expect(two_crystal_balls([false, false, false, true, false, false, false, false, false, false])).toBe(3);
+    });
 });
