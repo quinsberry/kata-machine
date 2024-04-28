@@ -1,32 +1,47 @@
 import Queue from "@code/Queue";
-import { expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
-test("queue", function () {
-    const list = new Queue<number>();
+describe("Queue", () => {
+    test("enqueue adds items to the queue", () => {
+        const queue = new Queue<number>();
+        queue.enqueue(1);
+        queue.enqueue(2);
+        expect(queue.length).toBe(2);
+    });
 
-    list.enqueue(5);
-    list.enqueue(7);
-    list.enqueue(9);
+    test("deque removes items from the queue", () => {
+        const queue = new Queue<number>();
+        queue.enqueue(1);
+        queue.enqueue(2);
+        expect(queue.deque()).toBe(1);
+        expect(queue.length).toBe(1);
+    });
 
-    expect(list.deque()).toEqual(5);
-    expect(list.length).toEqual(2);
+    test("deque returns undefined when called on an empty queue", () => {
+        const queue = new Queue<number>();
+        expect(queue.deque()).toBeUndefined();
+    });
 
-    // this must be wrong..?
-    debugger;
+    test("peek returns the first item without removing it", () => {
+        const queue = new Queue<number>();
+        queue.enqueue(1);
+        queue.enqueue(2);
+        expect(queue.peek()).toBe(1);
+        expect(queue.length).toBe(2);
+    });
 
-    // i hate using debuggers
-    list.enqueue(11);
-    debugger;
-    expect(list.deque()).toEqual(7);
-    expect(list.deque()).toEqual(9);
-    expect(list.peek()).toEqual(11);
-    expect(list.deque()).toEqual(11);
-    expect(list.deque()).toBeUndefined();
-    expect(list.length).toEqual(0);
+    test("peek returns undefined when called on an empty queue", () => {
+        const queue = new Queue<number>();
+        expect(queue.peek()).toBeUndefined();
+    });
 
-    // just wanted to make sure that I could not blow up myself when i remove
-    // everything
-    list.enqueue(69);
-    expect(list.peek()).toEqual(69);
-    expect(list.length).toEqual(1);
+    test("length returns the number of items in the queue", () => {
+        const queue = new Queue<number>();
+        expect(queue.length).toBe(0);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        expect(queue.length).toBe(2);
+        queue.deque();
+        expect(queue.length).toBe(1);
+    });
 });

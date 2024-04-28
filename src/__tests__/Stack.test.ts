@@ -1,28 +1,55 @@
 import Stack from "@code/Stack";
-import { expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
-test("stack", function () {
-    const list = new Stack<number>();
+describe("Stack", () => {
+    test("push adds items to the stack", () => {
+        const stack = new Stack<number>();
+        stack.push(1);
+        stack.push(2);
+        expect(stack.length).toBe(2);
+    });
 
-    list.push(5);
-    list.push(7);
-    list.push(9);
+    test("pop removes items from the stack", () => {
+        const stack = new Stack<number>();
+        stack.push(1);
+        stack.push(2);
+        expect(stack.pop()).toBe(2);
+        expect(stack.length).toBe(1);
+    });
 
-    expect(list.pop()).toEqual(9);
-    expect(list.length).toEqual(2);
+    test("pop returns undefined when called on an empty stack", () => {
+        const stack = new Stack<number>();
+        expect(stack.pop()).toBeUndefined();
+        stack.push(1)
+        expect(stack.pop()).toBe(1);
+        expect(stack.pop()).toBeUndefined();
+        expect(stack.pop()).toBeUndefined();
+    });
 
-    list.push(11);
-    expect(list.pop()).toEqual(11);
-    expect(list.pop()).toEqual(7);
-    expect(list.peek()).toEqual(5);
-    expect(list.pop()).toEqual(5);
-    expect(list.pop()).toBeUndefined();
+    test("peek returns the top item without removing it", () => {
+        const stack = new Stack<number>();
+        stack.push(1);
+        stack.push(2);
+        expect(stack.peek()).toBe(2);
+        expect(stack.length).toBe(2);
+    });
 
-    // just wanted to make sure that I could not blow up myself when i remove
-    // everything
-    list.push(69);
-    expect(list.peek()).toEqual(69);
-    expect(list.length).toEqual(1);
+    test("peek returns undefined when called on an empty stack", () => {
+        const stack = new Stack<number>();
+        expect(stack.peek()).toBeUndefined();
+    });
 
-    //yayaya
+    test("length returns the number of items in the stack", () => {
+        const stack = new Stack<number>();
+        expect(stack.length).toBe(0);
+        stack.push(1);
+        stack.push(2);
+        expect(stack.length).toBe(2);
+        stack.pop();
+        expect(stack.length).toBe(1);
+        stack.pop();
+        expect(stack.length).toBe(0);
+        stack.pop();
+        expect(stack.length).toBe(0);
+    });
 });
