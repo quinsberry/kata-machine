@@ -2,9 +2,10 @@
 const a: number[] = [];
 
 function time(fn: () => void): number {
-    const now = Date.now();
+    const t0 = performance.now();
     fn();
-    return Date.now() - now;
+    const t1 = performance.now();
+    return Number((t1 - t0).toFixed(2));
 }
 
 function unshift(number: number) {
