@@ -1,11 +1,11 @@
-
 const a: number[] = [];
 
-function time(fn: () => void): number {
+function time(fn: () => void): string {
     const t0 = performance.now();
     fn();
     const t1 = performance.now();
-    return Number((t1 - t0).toFixed(2));
+    const numberFormat = new Intl.NumberFormat();
+    return `${numberFormat.format(t1 - t0)}ms`;
 }
 
 function unshift(number: number) {
@@ -33,45 +33,45 @@ function pop(number: number) {
 }
 
 function get(idx: number) {
-    return function() {
+    return function () {
         return a[idx];
     };
 }
 
 function push_arr(count: number) {
-    return function() {
+    return function () {
         push(count);
     };
 }
 
 function pop_arr(count: number) {
-    return function() {
+    return function () {
         pop(count);
     };
 }
 
 function unshift_arr(count: number) {
-    return function() {
+    return function () {
         unshift(count);
     };
 }
 
 function shift_arr(count: number) {
-    return function() {
+    return function () {
         shift(count);
     };
 }
 
 const tests = [10, 100, 1000, 10000, 100000, 1_000_000, 10_000_000];
 console.log("Testing get");
-tests.forEach(t => {
+tests.forEach((t) => {
     a.length = 0;
     push(t);
     console.log(t, time(get(t - 1)));
 });
 
 console.log("push");
-tests.forEach(t => {
+tests.forEach((t) => {
     a.length = 0;
     push(t);
 
@@ -79,7 +79,7 @@ tests.forEach(t => {
 });
 
 console.log("pop");
-tests.forEach(t => {
+tests.forEach((t) => {
     a.length = 0;
     push(t);
 
@@ -87,7 +87,7 @@ tests.forEach(t => {
 });
 
 console.log("unshift");
-tests.forEach(t => {
+tests.forEach((t) => {
     a.length = 0;
     push(t);
 
@@ -95,7 +95,7 @@ tests.forEach(t => {
 });
 
 console.log("shift");
-tests.forEach(t => {
+tests.forEach((t) => {
     a.length = 0;
     push(t);
 
