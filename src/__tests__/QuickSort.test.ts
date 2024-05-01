@@ -1,10 +1,7 @@
 import quick_sort from "@code/QuickSort";
-import { expect, test } from "bun:test";
+import { describe } from "bun:test";
+import { test_sort } from "./data/SortTest";
 
-test("quick-sort", function () {
-    const arr = [9, 3, 7, 4, 69, 420, 42];
-
-    debugger;
-    quick_sort(arr);
-    expect(arr).toEqual([3, 4, 7, 9, 42, 69, 420]);
+describe("QuickSort", function () {
+    test_sort(quick_sort);
 });
