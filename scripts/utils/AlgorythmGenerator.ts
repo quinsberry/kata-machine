@@ -43,7 +43,7 @@ export class AlgorythmGenerator {
     private generate_method(method: AlgorythmMethod) {
         return `
     ${method.name}(${method.args || ""}): ${method.return || "void"} {
-    
+        
     }
         `;
     }

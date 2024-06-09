@@ -43,13 +43,13 @@ const list_interface: Partial<AlgorythmStructure> = {
             return: "T | undefined",
         },
     ],
-    getters: length_property.properties
+    ...length_property,
 };
 export const dsa: DSA = {
     LRU: {
         generic: "<K, V>",
         type: "class",
-        args: 'init: number',
+        args: "init: number",
         methods: [
             {
                 name: "update",
@@ -122,6 +122,7 @@ export const dsa: DSA = {
     RingBuffer: {
         generic: "<T>",
         type: "class",
+        args: "capacity: number",
         methods: [
             {
                 name: "push",
@@ -149,7 +150,7 @@ export const dsa: DSA = {
 
     ArrayList: {
         type: "class",
-        args: 'items: T',
+        args: "capacity: number",
         generic: "<T>",
         ...list_interface,
     },
