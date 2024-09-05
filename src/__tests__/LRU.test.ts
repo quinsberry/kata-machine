@@ -1,28 +1,93 @@
 import LRU from "@code/LRU";
-import { expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
-test("LRU", function () {
-    const lru = new LRU<string, number>(3) as ILRU<string, number>;
+describe("LRU", () => {
+    test("LRU Empty Cache", () => {
+        const lru = new LRU<string, number>(2) as ILRU<string, number>;
+        expect(lru.get("nonexistent")).toBeUndefined();
+    });
 
-    expect(lru.get("foo")).toBeUndefined();;
-    lru.update("foo", 69);
-    expect(lru.get("foo")).toEqual(69);
+    test("LRU Update and Get", () => {
+        const lru = new LRU<string, number>(2) as ILRU<string, number>;
 
-    lru.update("bar", 420);
-    expect(lru.get("bar")).toEqual(420);
+        lru.update("foo", 1);
+        expect(lru.get("foo")).toEqual(1);
 
-    lru.update("baz", 1337);
-    expect(lru.get("baz")).toEqual(1337);
+        lru.update("bar", 2);
+        expect(lru.get("bar")).toEqual(2);
+        expect(lru.get("foo")).toEqual(1);
+    });
 
-    lru.update("ball", 69420);
-    expect(lru.get("ball")).toEqual(69420);
-    expect(lru.get("foo")).toBeUndefined();;
-    expect(lru.get("bar")).toEqual(420);
-    lru.update("foo", 69);
-    expect(lru.get("bar")).toEqual(420);
-    expect(lru.get("foo")).toEqual(69);
+    test("LRU Capacity", () => {
+        const lru = new LRU<string, number>(2) as ILRU<string, number>;
 
-    // shouldn't of been deleted, but since bar was get'd, bar was added to the
-    // front of the list, so baz became the end
-    expect(lru.get("baz")).toBeUndefined();;
+        lru.update("foo", 1);
+        lru.update("bar", 2);
+        lru.update("baz", 3);
+
+        expect(lru.get("foo")).toBeUndefined();
+        expect(lru.get("bar")).toEqual(2);
+        expect(lru.get("baz")).toEqual(3);
+    });
+
+    test("LRU Order", () => {
+        const lru = new LRU<string, number>(2) as ILRU<string, number>;
+
+        lru.update("foo", 1);
+        lru.update("bar", 2);
+
+        // Access "foo" to make it most recently used
+        expect(lru.get("foo")).toEqual(1);
+
+        // Add a new item, which should evict "bar"
+        lru.update("baz", 3);
+
+        expect(lru.get("bar")).toBeUndefined();
+        expect(lru.get("foo")).toEqual(1);
+        expect(lru.get("baz")).toEqual(3);
+    });
+
+    test("LRU Overwrite", () => {
+        const lru = new LRU<string, number>(2) as ILRU<string, number>;
+
+        lru.update("foo", 1);
+        expect(lru.get("foo")).toEqual(1);
+
+        lru.update("foo", 2);
+        expect(lru.get("foo")).toEqual(2);
+    });
+
+    test("LRU Single Item Capacity", () => {
+        const lru = new LRU<string, number>(1) as ILRU<string, number>;
+
+        lru.update("foo", 1);
+        expect(lru.get("foo")).toEqual(1);
+
+        lru.update("bar", 2);
+        expect(lru.get("foo")).toBeUndefined();
+        expect(lru.get("bar")).toEqual(2);
+    });
+
+    test("LRU Non-Existent Key", () => {
+        const lru = new LRU<string, number>(2) as ILRU<string, number>;
+
+        lru.update("foo", 1);
+        expect(lru.get("bar")).toBeUndefined();
+    });
+
+    test("LRU Large Capacity", () => {
+        const lru = new LRU<string, number>(1000) as ILRU<string, number>;
+
+        for (let i = 0; i < 1000; i++) {
+            lru.update(`key${i}`, i);
+        }
+
+        for (let i = 0; i < 1000; i++) {
+            expect(lru.get(`key${i}`)).toEqual(i);
+        }
+
+        lru.update("newKey", 1001);
+        expect(lru.get("newKey")).toEqual(1001);
+        expect(lru.get("key0")).toBeUndefined(); // The first key should be evicted
+    });
 });
