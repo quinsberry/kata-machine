@@ -1,3 +1,14 @@
+/**
+ * Structure:
+ *
+ *           20
+ *          /  \
+ *        10    50
+ *       / \   /  \
+ *      5  15 30  100
+ *       \    / \
+ *        7  29  45
+ */
 export const tree: BinaryNode<number> = {
     value: 20,
     right: {
@@ -40,6 +51,20 @@ export const tree: BinaryNode<number> = {
     },
 };
 
+
+/**
+ * Structure:
+ * 
+ *          20
+ *         /  \
+ *       10    50
+ *      / \   /
+ *     5  15 30
+ *      \    / \
+ *       7  29  45
+ *          /    \
+ *         21    49
+ */
 export const tree2: BinaryNode<number> = {
     value: 20,
     right: {
