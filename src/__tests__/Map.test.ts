@@ -1,24 +1,42 @@
 import MyMap from "@code/Map";
-import { expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
-test("Map", function () {
-    const map = new MyMap<string, number>();
-    map.set("foo", 55);
-    expect(map.size()).toEqual(1);
-    map.set("fool", 75);
-    expect(map.size()).toEqual(2);
-    map.set("foolish", 105);
-    expect(map.size()).toEqual(3);
-    map.set("bar", 69);
-    expect(map.size()).toEqual(4);
+describe("Map", () => {
+    test("get method retrieves correct value", function () {
+        const map = new MyMap<string, number>();
+        map.set("alpha", 1);
+        map.set("beta", 2);
+        expect(map.get("alpha")).toEqual(1);
+        expect(map.get("beta")).toEqual(2);
+        expect(map.get("gamma")).toBeUndefined();
+    });
 
-    expect(map.get("bar")).toEqual(69);
-    expect(map.get("blaz")).toBeUndefined();
+    test("set method adds and updates key-value pairs", function () {
+        const map = new MyMap<string, number>();
+        map.set("alpha", 1);
+        expect(map.get("alpha")).toEqual(1);
+        map.set("alpha", 2);
+        expect(map.get("alpha")).toEqual(2);
+    });
 
-    map.delete("barblabr");
-    expect(map.size()).toEqual(4);
+    test("delete method removes key-value pairs and returns deleted value", function () {
+        const map = new MyMap<string, number>();
+        map.set("alpha", 1);
+        map.set("beta", 2);
+        expect(map.delete("alpha")).toEqual(1);
+        expect(map.get("alpha")).toBeUndefined();
+        expect(map.size()).toEqual(1);
+        expect(map.delete("gamma")).toBeUndefined();
+    });
 
-    map.delete("bar");
-    expect(map.size()).toEqual(3);
-    expect(map.get("bar")).toBeUndefined();
+    test("size method returns correct number of key-value pairs", function () {
+        const map = new MyMap<string, number>();
+        expect(map.size()).toEqual(0);
+        map.set("alpha", 1);
+        expect(map.size()).toEqual(1);
+        map.set("beta", 2);
+        expect(map.size()).toEqual(2);
+        map.delete("alpha");
+        expect(map.size()).toEqual(1);
+    });
 });
