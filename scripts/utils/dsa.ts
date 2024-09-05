@@ -49,7 +49,7 @@ export const dsa: DSA = {
     LRU: {
         generic: "<K, V>",
         type: "class",
-        args: "init: number",
+        args: "capacity: number",
         methods: [
             {
                 name: "update",
@@ -94,22 +94,22 @@ export const dsa: DSA = {
     },
 
     Map: {
-        generic: "<T extends (string | number), V>",
+        generic: "<K extends (string | number), V>",
         type: "class",
         methods: [
             {
                 name: "get",
-                args: "key: T",
+                args: "key: K",
                 return: "V | undefined",
             },
             {
                 name: "set",
-                args: "key: T, value: V",
+                args: "key: K, value: V",
                 return: "void",
             },
             {
                 name: "delete",
-                args: "key: T",
+                args: "key: K",
                 return: "V | undefined",
             },
             {
