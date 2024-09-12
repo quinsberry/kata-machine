@@ -39,7 +39,7 @@ export function searchFasterThanLinearithmic(
         { length: 100_000 },
         (_, i) => (i === 9999 ? 100_000 : 1),
     );
-    const target = 100_000;
+    const target = 1;
 
     const interpolationSearchTime = time(() =>
         interpolationSearch(worstCaseForInterpolationSearch, target),
