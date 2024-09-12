@@ -31,7 +31,7 @@ describe("LinearSearch", function () {
         expect(linear_fn([1], 2)).toBeFalse();
     });
 
-    test("should search faster than O(n)", () => {
+    test("should search faster than O(n log n)", () => {
         expect(searchFasterThanLinearithmic(linear_fn)).toBeTrue();
     });
 });
