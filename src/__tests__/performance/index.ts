@@ -5,6 +5,7 @@ export {
     searchFasterThanExponential,
     searchFasterThanFactorial,
     searchFasterThanLogarithmic,
+    searchFasterThan,
 } from "./search/search-performance";
 export {
     sortFasterThanLinear,

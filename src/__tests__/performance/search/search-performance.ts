@@ -36,15 +36,17 @@ export function searchFasterThanLinearithmic(
     fn: (arr: number[], target: number) => void,
 ): boolean {
     const worstCaseForInterpolationSearch = Array.from(
-        { length: 10_000 },
-        (_, i) => (i === 10_000 - 1 ? i : 1),
-    ); // [1, 1, 1 ... 10_000 - 1]
-    const target = 10_000 - 1;
+        { length: 100_000 },
+        (_, i) => (i === 9999 ? 100_000 : 1),
+    );
+    const target = 100_000;
 
     const interpolationSearchTime = time(() =>
         interpolationSearch(worstCaseForInterpolationSearch, target),
     );
     const fnTime = time(() => fn(worstCaseForInterpolationSearch, target));
+
+    console.log(interpolationSearchTime, fnTime);
 
     return fnTime < interpolationSearchTime;
 }
@@ -83,4 +85,32 @@ export function searchFasterThanFactorial(
     const fnTime = time(() => fn(arr, target));
 
     return fnTime < bruteForceSearchTime;
+}
+
+export function searchFasterThan(
+    complexity:
+        | "O(log n)"
+        | "O(n)"
+        | "O(n log n)"
+        | "O(n^2)"
+        | "O(2^n)"
+        | "O(n!)",
+    fn: (arr: number[], target: number) => void,
+): boolean {
+    switch (complexity) {
+        case "O(log n)":
+            return searchFasterThanLogarithmic(fn);
+        case "O(n)":
+            return searchFasterThanLinear(fn);
+        case "O(n log n)":
+            return searchFasterThanLinearithmic(fn);
+        case "O(n^2)":
+            return searchFasterThanQuadratic(fn);
+        case "O(2^n)":
+            return searchFasterThanExponential(fn);
+        case "O(n!)":
+            return searchFasterThanFactorial(fn);
+        default:
+            throw new Error("Unknown complexity");
+    }
 }
