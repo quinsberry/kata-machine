@@ -1,5 +1,6 @@
 import binary_fn from "@code/BinarySearchList";
 import { describe, expect, test } from "bun:test";
+import { searchFasterThanLinear } from "./performance";
 
 describe("BinarySearchList", () => {
     test("finds element in the middle of the array", () => {
@@ -28,5 +29,9 @@ describe("BinarySearchList", () => {
 
     test("returns false if element is not in array of length 1", () => {
         expect(binary_fn([1], 2)).toBeFalse();
+    });
+
+    test("should search faster than O(n)", () => {
+        expect(searchFasterThanLinear(binary_fn)).toBeTrue();
     });
 });

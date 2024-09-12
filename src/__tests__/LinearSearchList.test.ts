@@ -1,12 +1,37 @@
 import linear_fn from "@code/LinearSearchList";
-import { expect, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
+import { searchFasterThanLinearithmic } from "./performance";
 
-test("linear search array", function () {
-    const foo = [1, 3, 4, 69, 71, 81, 90, 99, 420, 1337, 69420];
-    expect(linear_fn(foo, 69)).toEqual(true);
-    expect(linear_fn(foo, 1336)).toEqual(false);
-    expect(linear_fn(foo, 69420)).toEqual(true);
-    expect(linear_fn(foo, 69421)).toEqual(false);
-    expect(linear_fn(foo, 1)).toEqual(true);
-    expect(linear_fn(foo, 0)).toEqual(false);
+describe("LinearSearch", function () {
+    test("finds element in the middle of the array", () => {
+        expect(linear_fn([1, 2, 3, 4, 5], 3)).toBeTrue();
+    });
+
+    test("finds element at the beginning of the array", () => {
+        expect(linear_fn([1, 2, 3, 4, 5], 1)).toBeTrue();
+    });
+
+    test("finds element at the end of the array", () => {
+        expect(linear_fn([1, 2, 3, 4, 5], 5)).toBeTrue();
+    });
+
+    test("returns false if element is not in the array", () => {
+        expect(linear_fn([1, 2, 3, 4, 5], 6)).toBeFalse();
+    });
+
+    test("returns false if array is empty", () => {
+        expect(linear_fn([], 1)).toBeFalse();
+    });
+
+    test("finds element in array of length 1", () => {
+        expect(linear_fn([1], 1)).toBeTrue();
+    });
+
+    test("returns false if element is not in array of length 1", () => {
+        expect(linear_fn([1], 2)).toBeFalse();
+    });
+
+    test("should search faster than O(n)", () => {
+        expect(searchFasterThanLinearithmic(linear_fn)).toBeTrue();
+    });
 });

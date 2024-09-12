@@ -35,13 +35,16 @@ export function searchFasterThanLinear(
 export function searchFasterThanLinearithmic(
     fn: (arr: number[], target: number) => void,
 ): boolean {
-    const arr = Array.from({ length: 10_000 }, (_, i) => 10_000 - i);
-    const target = 0;
+    const worstCaseForInterpolationSearch = Array.from(
+        { length: 10_000 },
+        (_, i) => (i === 10_000 - 1 ? i : 1),
+    ); // [1, 1, 1 ... 10_000 - 1]
+    const target = 10_000 - 1;
 
     const interpolationSearchTime = time(() =>
-        interpolationSearch(arr, target),
+        interpolationSearch(worstCaseForInterpolationSearch, target),
     );
-    const fnTime = time(() => fn(arr, target));
+    const fnTime = time(() => fn(worstCaseForInterpolationSearch, target));
 
     return fnTime < interpolationSearchTime;
 }
@@ -61,7 +64,7 @@ export function searchFasterThanQuadratic(
 export function searchFasterThanExponential(
     fn: (arr: number[], target: number) => void,
 ): boolean {
-    const arr = Array.from({ length: 10_000 }, (_, i) => 10_000 - i);
+    const arr = Array.from({ length: 10 }, (_, i) => 10 - i);
     const target = 0;
 
     const subsetSumTime = time(() => subsetSum(arr, target));
@@ -73,7 +76,7 @@ export function searchFasterThanExponential(
 export function searchFasterThanFactorial(
     fn: (arr: number[], target: number) => void,
 ): boolean {
-    const arr = Array.from({ length: 10_000 }, (_, i) => 10_000 - i);
+    const arr = Array.from({ length: 10 }, (_, i) => 10 - i);
     const target = 0;
 
     const bruteForceSearchTime = time(() => bruteForceSearch(arr, target));

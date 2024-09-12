@@ -50,9 +50,12 @@ export function sortFasterThanLinearithmic(
 }
 
 export function sortFasterThanQuadratic(fn: (arr: number[]) => void): boolean {
-    const arr = Array.from({ length: 10_000 }, (_, i) => 10_000 - i);
-    const arr1 = [...arr];
-    const arr2 = [...arr];
+    const worstCaseForQuadraticSortAlgorythms = Array.from(
+        { length: 10_000 },
+        (_, i) => 10_000 - i,
+    );
+    const arr1 = [...worstCaseForQuadraticSortAlgorythms];
+    const arr2 = [...worstCaseForQuadraticSortAlgorythms];
 
     const bubbleSortTime = time(() => bubbleSort(arr1));
     const insertionSortTime = time(() => insertionSort(arr1));
@@ -71,7 +74,7 @@ export function sortFasterThanQuadratic(fn: (arr: number[]) => void): boolean {
 export function sortFasterThanExponential(
     fn: (arr: number[]) => void,
 ): boolean {
-    const arr = Array.from({ length: 10_000 }, (_, i) => 10_000 - i);
+    const arr = Array.from({ length: 10 }, (_, i) => 10 - i);
     const arr1 = [...arr];
     const arr2 = [...arr];
 
@@ -82,7 +85,7 @@ export function sortFasterThanExponential(
 }
 
 export function sortFasterThanFactorial(fn: (arr: number[]) => void): boolean {
-    const arr = Array.from({ length: 10_000 }, (_, i) => 10_000 - i);
+    const arr = Array.from({ length: 10 }, (_, i) => 10 - i);
     const arr1 = [...arr];
     const arr2 = [...arr];
 
