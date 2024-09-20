@@ -363,3 +363,5 @@ export const dsa: DSA = {
         return: "number[] | null",
     },
 };
+
+export const allAlgorithms: (keyof DSA)[] = Object.keys(dsa) as (keyof DSA)[];
