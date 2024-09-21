@@ -1,5 +1,4 @@
 import { join } from "node:path";
-import { Algorythm } from "./types";
 
 export const src_path = join(process.cwd(), "src");
 export const package_json_path = join(process.cwd(), "package.json");

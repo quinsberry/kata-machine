@@ -99,7 +99,7 @@ export interface ClassStructure {
     methods: ClassMethod[];
     properties?: ClassProperty[];
     getters?: ClassGetter[];
-    description?: string;
+    description: string;
 }
 export interface FunctionStructure {
     generic?: string;
@@ -107,5 +107,5 @@ export interface FunctionStructure {
     fn: string;
     args: string;
     return: string;
-    description?: string;
+    description: string;
 }
