@@ -19,7 +19,11 @@ export class AlgorythmGenerator {
 }
         `;
 
-        Bun.write(join(this.path, `${name}.ts`), classGen);
+        const classGenWithDescription = this.add_description(
+            classGen,
+            item.description,
+        );
+        Bun.write(join(this.path, `${name}.ts`), classGenWithDescription);
     }
 
     create_function(name: string, item: FunctionStructure) {
@@ -29,7 +33,20 @@ export class AlgorythmGenerator {
 }
         `;
 
-        Bun.write(join(this.path, `${name}.ts`), funcitonGen);
+        const funcitonGenWithDescription = this.add_description(
+            funcitonGen,
+            item.description,
+        );
+
+        Bun.write(join(this.path, `${name}.ts`), funcitonGenWithDescription);
+    }
+
+    private add_description(file: string, description: string | undefined) {
+        let fileWithDescription = file;
+        if (description) {
+            fileWithDescription = description + "\n" + file;
+        }
+        return fileWithDescription;
     }
 
     private generate_constructor(args: string | undefined) {
@@ -71,11 +88,9 @@ export interface ClassMethod {
     args?: string;
     return: string;
 }
-export interface ClassGetter extends ClassProperty {
-}
+export interface ClassGetter extends ClassProperty {}
 
 export type AlgorythmStructure = ClassStructure | FunctionStructure;
-
 
 export interface ClassStructure {
     generic?: string;
@@ -84,6 +99,7 @@ export interface ClassStructure {
     methods: ClassMethod[];
     properties?: ClassProperty[];
     getters?: ClassGetter[];
+    description?: string;
 }
 export interface FunctionStructure {
     generic?: string;
@@ -91,4 +107,5 @@ export interface FunctionStructure {
     fn: string;
     args: string;
     return: string;
+    description?: string;
 }

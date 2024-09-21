@@ -29,6 +29,7 @@ export async function package_json(
         })
     ).default;
     package_json.scripts.day = `echo ${day_path}`;
+    package_json.scripts['format:day'] = `prettier --write --ignore-path .prettierignore ./${day_path}`;
 
     return Bun.write(package_json_path, JSON.stringify(package_json, null, 4));
 }

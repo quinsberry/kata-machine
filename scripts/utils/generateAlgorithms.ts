@@ -1,3 +1,4 @@
+import { $ } from "bun";
 import { readdirSync, unlinkSync, mkdirSync } from "node:fs";
 import { join, relative } from "node:path";
 import { dsa } from "./dsa";
@@ -58,6 +59,7 @@ export async function generateAlgorithms(config: LigmaConfig) {
     const { ts_config, package_json, stats } = await import("./align-configs");
 
     ts_config(tsconfig_path, day_name);
-    package_json(package_json_path, relative_day_path);
+    await package_json(package_json_path, relative_day_path);
     stats(stats_path, config);
+    await $`bun run format:day`;
 }
