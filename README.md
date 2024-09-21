@@ -23,22 +23,40 @@ make an issue and we will come up with the potential name.
 I have just started to add algorithms, so the number of supported algorithms is
 limited at the moment, but will grow fairly quick.
 
-### WARNING
-OUT OF DATE.  We have quite a few more.  need to update
 ### Supported Algorithm
+* Linear search
+* Binary search
+* Pre order search (Binary Tree)
+* In order search (Binary Tree)
+* Post order search (Binary Tree)
+* Bread first search (Binary Tree)
+* Depth first search (Binary Tree)
+* Compare (Binary Tree)
+* Bread first search (Adjacency List)
+* Depth first search (Adjacency List)
+* Bread first search (Adjacency Matrix)
+* Bubble sort
 * Insertion sort
 * Merge sort
-* QuickSort
+* Quick sort
+* Maze solver
+* Two Crystal balls
 * Prim's MST (Adjacency List)
 * Dijkstra's Shortest Path (Adjacency List)
 
 ### Supported Data Structures
+* Array list
 * Singly linked list
 * Doubly linked list
+* Ring Buffer
 * Queue
 * Stack
 * Graph with Adjacency List
-* Graph with Adjacency Matrix (untested)
+* Graph with Adjacency Matrix
+* Trie
+* Map
+* MinHeap
+* Least Recently Used
 
 ### How It Works
 
@@ -49,6 +67,16 @@ clone the repo and install the dependencies
 ```bash
 bun install
 ```
+
+### 1. Using CLI
+
+Run the `cli` command and choose the options
+```bash
+bun run cli
+```
+
+
+### 2. Manualy
 
 edit the `ligma.config.ts` file
 ```typescript
@@ -61,6 +89,7 @@ export const config: LigmaConfig = {
         "QuickSort",
         "DijkstraList",
         "PrimsList",
+        ...
     ],
 }
 ```
