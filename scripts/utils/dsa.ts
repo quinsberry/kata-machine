@@ -190,7 +190,7 @@ export const dsa: DSA = {
             * 
             * Methods:
             * - prepend(item) - Adds an item to the beginning of the list.
-            * - insertAt(item, idx) - Inserts an item at the specified index.
+            * - insertAt(item, idx) - Inserts an item at the specified index. If the index is out of bounds, throws an error.
             * - append(item) - Adds an item to the end of the list.
             * - remove(item) - Removes the first occurrence of the item from the list and returns it, otherwise returns undefined.
             * - get(idx) - Retrieves the item at the specified index.

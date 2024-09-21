@@ -46,8 +46,6 @@ export function searchFasterThanLinearithmic(
     );
     const fnTime = time(() => fn(worstCaseForInterpolationSearch, target));
 
-    console.log(interpolationSearchTime, fnTime);
-
     return fnTime < interpolationSearchTime;
 }
 
