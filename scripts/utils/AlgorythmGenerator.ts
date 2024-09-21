@@ -10,7 +10,7 @@ export class AlgorythmGenerator {
         this.path = path;
     }
 
-    create_class(name: string, item: AlgorythmStructure) {
+    create_class(name: string, item: ClassStructure) {
         const classGen = `export default class ${name}${item.generic || ""} {
     ${(item.properties || []).map(this.generate_property).join("")}
     ${this.generate_constructor(item.args)}
@@ -22,7 +22,7 @@ export class AlgorythmGenerator {
         Bun.write(join(this.path, `${name}.ts`), classGen);
     }
 
-    create_function(name: string, item: AlgorythmStructure) {
+    create_function(name: string, item: FunctionStructure) {
         const g = item.generic ? item.generic : "";
         const funcitonGen = `export default function ${item.fn}${g}(${item.args}): ${item.return} {
     
@@ -40,7 +40,7 @@ export class AlgorythmGenerator {
         `;
     }
 
-    private generate_method(method: AlgorythmMethod) {
+    private generate_method(method: ClassMethod) {
         return `
     ${method.name}(${method.args || ""}): ${method.return || "void"} {
         
@@ -48,11 +48,11 @@ export class AlgorythmGenerator {
         `;
     }
 
-    private generate_property(prop: AlgorythmProp) {
+    private generate_property(prop: ClassProperty) {
         return `${prop.scope} ${prop.name}: ${prop.type};`;
     }
 
-    private generate_getter(getter: AlgorythmGetter) {
+    private generate_getter(getter: ClassGetter) {
         return `
     ${getter.scope} get ${getter.name}(): ${getter.type} {
     
@@ -61,26 +61,34 @@ export class AlgorythmGenerator {
     }
 }
 
-export interface AlgorythmProp {
+export interface ClassProperty {
     name: string;
     type: string;
     scope: string;
 }
-export interface AlgorythmMethod {
+export interface ClassMethod {
     name: string;
     args?: string;
     return: string;
 }
-export interface AlgorythmGetter extends AlgorythmProp {
+export interface ClassGetter extends ClassProperty {
 }
 
-export interface AlgorythmStructure {
+export type AlgorythmStructure = ClassStructure | FunctionStructure;
+
+
+export interface ClassStructure {
     generic?: string;
-    type: "class" | "fn";
-    methods?: AlgorythmMethod[];
-    properties?: AlgorythmProp[];
-    getters?: AlgorythmGetter[];
-    fn?: string;
+    type: "class";
     args?: string;
-    return?: string;
+    methods: ClassMethod[];
+    properties?: ClassProperty[];
+    getters?: ClassGetter[];
+}
+export interface FunctionStructure {
+    generic?: string;
+    type: "fn";
+    fn: string;
+    args: string;
+    return: string;
 }

@@ -1,50 +1,49 @@
-import { AlgorythmStructure } from "./AlgorythmGenerator";
+import {
+    ClassMethod,
+    ClassProperty,
+} from "./AlgorythmGenerator";
 import { DSA } from "./types";
 
-const length_property = {
-    properties: [
-        {
-            name: "length",
-            type: "number",
-            scope: "public",
-        },
-    ],
+const length_property: ClassProperty = {
+    name: "length",
+    type: "number",
+    scope: "public",
 };
-const list_interface: Partial<AlgorythmStructure> = {
-    methods: [
-        {
-            name: "prepend",
-            args: "item: T",
-            return: "void",
-        },
-        {
-            name: "insertAt",
-            args: "item: T, idx: number",
-            return: "void",
-        },
-        {
-            name: "append",
-            args: "item: T",
-            return: "void",
-        },
-        {
-            name: "remove",
-            args: "item: T",
-            return: "T | undefined",
-        },
-        {
-            name: "get",
-            args: "idx: number",
-            return: "T | undefined",
-        },
-        {
-            name: "removeAt",
-            args: "idx: number",
-            return: "T | undefined",
-        },
-    ],
-    ...length_property,
-};
+
+const list_properties: ClassProperty[] = [length_property];
+const list_methods: ClassMethod[] = [
+    {
+        name: "prepend",
+        args: "item: T",
+        return: "void",
+    },
+    {
+        name: "insertAt",
+        args: "item: T, idx: number",
+        return: "void",
+    },
+    {
+        name: "append",
+        args: "item: T",
+        return: "void",
+    },
+    {
+        name: "remove",
+        args: "item: T",
+        return: "T | undefined",
+    },
+    {
+        name: "get",
+        args: "idx: number",
+        return: "T | undefined",
+    },
+    {
+        name: "removeAt",
+        args: "idx: number",
+        return: "T | undefined",
+    },
+];
+
 export const dsa: DSA = {
     LRU: {
         generic: "<K, V>",
@@ -84,13 +83,7 @@ export const dsa: DSA = {
                 return: "number",
             },
         ],
-        properties: [
-            {
-                name: "length",
-                type: "number",
-                scope: "public",
-            },
-        ],
+        properties: [length_property],
     },
 
     Map: {
@@ -139,35 +132,32 @@ export const dsa: DSA = {
                 return: "T | undefined",
             },
         ],
-        properties: [
-            {
-                name: "length",
-                type: "number",
-                scope: "public",
-            },
-        ],
+        properties: [length_property],
     },
 
     ArrayList: {
         type: "class",
         args: "capacity: number",
         generic: "<T>",
-        ...list_interface,
+        methods: list_methods,
+        properties: list_properties,
     },
     SinglyLinkedList: {
         generic: "<T>",
         type: "class",
-        ...list_interface,
+        methods: list_methods,
+        properties: list_properties,
     },
     DoublyLinkedList: {
         generic: "<T>",
         type: "class",
-        ...list_interface,
+        methods: list_methods,
+        properties: list_properties,
     },
     Queue: {
         generic: "<T>",
         type: "class",
-        ...length_property,
+        properties: [length_property],
         methods: [
             {
                 name: "enqueue",
@@ -189,7 +179,7 @@ export const dsa: DSA = {
     Stack: {
         generic: "<T>",
         type: "class",
-        ...length_property,
+        properties: [length_property],
         methods: [
             {
                 name: "push",
