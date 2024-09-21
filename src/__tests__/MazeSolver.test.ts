@@ -48,7 +48,7 @@ describe("MazeSolver", () => {
         const path = maze_solver(maze, "x", start, end);
         expect(path).toEqual([{ x: 1, y: 0 }]);
     });
-    
+
     test("it returns an empty path when start is out of bounds", () => {
         const maze = ["..."];
         const start = { x: 3, y: 0 };
@@ -56,7 +56,7 @@ describe("MazeSolver", () => {
         const path = maze_solver(maze, "x", start, end);
         expect(path).toEqual([]);
     });
-    
+
     test("it returns an empty path when end is out of bounds", () => {
         const maze = ["..."];
         const start = { x: 0, y: 0 };
@@ -64,7 +64,7 @@ describe("MazeSolver", () => {
         const path = maze_solver(maze, "x", start, end);
         expect(path).toEqual([]);
     });
-    
+
     test("it returns an empty path when start is on a wall", () => {
         const maze = ["x.."];
         const start = { x: 0, y: 0 };
@@ -72,7 +72,7 @@ describe("MazeSolver", () => {
         const path = maze_solver(maze, "x", start, end);
         expect(path).toEqual([]);
     });
-    
+
     test("it returns an empty path when end is on a wall", () => {
         const maze = ["..x"];
         const start = { x: 0, y: 0 };

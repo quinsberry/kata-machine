@@ -51,10 +51,9 @@ export const tree: BinaryNode<number> = {
     },
 };
 
-
 /**
  * Structure:
- * 
+ *
  *          20
  *         /  \
  *       10    50

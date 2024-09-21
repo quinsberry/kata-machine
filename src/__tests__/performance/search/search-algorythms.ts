@@ -47,7 +47,11 @@ export function interpolationSearch(arr: number[], target: number): number {
             return -1;
         }
 
-        const pos = low + Math.floor(((target - arr[low]) * (high - low)) / (arr[high] - arr[low]));
+        const pos =
+            low +
+            Math.floor(
+                ((target - arr[low]) * (high - low)) / (arr[high] - arr[low]),
+            );
 
         if (arr[pos] === target) {
             return pos;
@@ -95,7 +99,10 @@ function subsetSumHelper(arr: number[], n: number, sum: number): boolean {
         return subsetSumHelper(arr, n - 1, sum);
     }
 
-    return subsetSumHelper(arr, n - 1, sum) || subsetSumHelper(arr, n - 1, sum - arr[n - 1]);
+    return (
+        subsetSumHelper(arr, n - 1, sum) ||
+        subsetSumHelper(arr, n - 1, sum - arr[n - 1])
+    );
 }
 
 /**

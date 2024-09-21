@@ -20,7 +20,7 @@ describe("Stack", () => {
     test("pop returns undefined when called on an empty stack", () => {
         const stack = new Stack<number>();
         expect(stack.pop()).toBeUndefined();
-        stack.push(1)
+        stack.push(1);
         expect(stack.pop()).toBe(1);
         expect(stack.pop()).toBeUndefined();
         expect(stack.pop()).toBeUndefined();

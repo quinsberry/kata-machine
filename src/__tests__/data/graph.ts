@@ -1,6 +1,6 @@
 /**
  * Structure:
- * 
+ *
  *      (1) ---> (4) ---> (5)
  *     /  |       |       /|
  *   (0)  | ------|------- |
@@ -44,7 +44,7 @@ circleList1[6] = [
 
 /**
  * Structure:
- * 
+ *
  *      > (1) <--> (4) ----> (5)
  *     /          |        / |
  *   (0)    ------|--------  |
@@ -72,7 +72,7 @@ circleList2[6] = [{ to: 3, weight: 1 }];
 
 /**
  * Structure:
- * 
+ *
  *      (0) --> (2)     (1) --> (3)
  *               |
  *               v
@@ -80,15 +80,9 @@ circleList2[6] = [{ to: 3, weight: 1 }];
  */
 export const noPathList: WeightedAdjacencyList = [];
 
-noPathList[0] = [
-    { to: 2, weight: 1 },
-];
-noPathList[1] = [
-    { to: 3, weight: 1 },
-];
-noPathList[2] = [
-    { to: 4, weight: 1 },
-];
+noPathList[0] = [{ to: 2, weight: 1 }];
+noPathList[1] = [{ to: 3, weight: 1 }];
+noPathList[2] = [{ to: 4, weight: 1 }];
 noPathList[3] = [];
 noPathList[4] = [];
 noPathList[5] = [];
