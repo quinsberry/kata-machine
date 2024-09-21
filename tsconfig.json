@@ -10,11 +10,19 @@
         "target": "esnext",
         "module": "commonjs",
         "baseUrl": "src",
-        "typeRoots": ["node_modules/@types"],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
         "paths": {
-            "@code/*": ["day1/*"]
+            "@code/*": [
+                "day1/*"
+            ]
         }
     },
-    "include": ["./src/**/*"],
-    "exclude": ["node_modules"]
+    "include": [
+        "./src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }
