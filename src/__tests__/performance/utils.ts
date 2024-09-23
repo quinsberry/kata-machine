@@ -1,3 +1,4 @@
+import { hrtime } from "node:process";
 /**
  * Measures the execution time of a given function.
  *
@@ -5,9 +6,10 @@
  * @returns The duration of the function execution in milliseconds.
  */
 export function time(fn: () => void): number {
-    const t0 = performance.now();
+    const start = hrtime();
     fn();
-    const t1 = performance.now();
-    const duration = t1 - t0;
-    return duration;
+    const end = hrtime(start);
+    const durationInNanoseconds = end[0] * 1e9 + end[1];
+    const durationInMs = durationInNanoseconds / 1e6;
+    return durationInMs;
 }
